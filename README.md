@@ -13,13 +13,13 @@ PCI requirements and guidelines generally focus on legacy infrastructure. Contai
 - Regularly Monitor and Test Network
 - Maintain an Information Security Policy
 ## Key Discussion Topics
-###### Container Segmentation
+#### Container Segmentation
 Orchestrated container environments are more dynamic, so standard auditing for IP-based rules is not enough.
-###### Dynamic Hosting
+#### Dynamic Hosting
 Environments where all pods can be initiated on all nodes might include other machines into the PCI scope.
-###### Container Scanning
+#### Container Scanning
 External resources require security testing. Otherwise, frameworks and services might hold known vulnerabilities within the environment.
-###### Log Collection
+#### Log Collection
 PCI requires you to maintain a full audit trail of user interactions with the service, even after the container is gone.
 ## Container Segmentation
 Containers can create a false sense of segmentation because they run in both virtual environments and networks. While segmented in the virtual environment, they are not necessarily segmented on the network layer. Container orchestration tends to work in a similar format to NAT where port assignment is predetermined, which can undermine segmentation. Base internal communication is allowed between pods under the same host. Any service on the hosting server is allowed communication with any pods on that host.
@@ -31,13 +31,13 @@ One way to circumnavigate the container segmentation issue is to use micro-segme
 The default setting for pods is to allow any other pod on the same node to communicate with each other, aggregating more machines into the PCI scope. These settings break segmentation between environments and external pods can put other more secure pods at risk.
 ## Isolation Via Label Selectors
 Limiting all PCI pods to the same node and preventing other pods from being loaded in that node can eliminate the dynamic hosting issue. This can be done in several ways, but most of them rely on label selectors.
-###### nodeSelector
+#### nodeSelector
 NodeSelector is a field of PodSpec. It specifies a map of key-value pairs. For a pod to be eligible to run on a node, the node must have each of the indicated key-value pairs as labels. It can have additional labels as well. The most common usage is one key-value pair.
-###### nodeRestriction
+#### nodeRestriction
 This is a simple way to constrain pods to nodes with particular labels. NodeRestriction is an admission plugin that prevents kubelets from setting or modifying labels with a node-restriction.kubernetes.io/prefix. The affinity/anti-affinity feature greatly expands the types of constraints you can express.
-###### nodeName
+#### nodeName
 NodeName is the simplest form of node selection constraint but is not typically used because of its limitations. When this field of PodSpec is non-empty, the scheduler ignores the pod, and the kubelet running on the named node tries to run the pod. If nodeName is provided in the PodSpec, it takes precedence over the above methods for node selection.
-###### Taint
+#### Taint
 Node affinity is a property of pods that attracts them to a set of nodes, either as a preference or a hard requirement. Taints are the opposite. They allow a node to repel a set of pods. Tolerations are applied to pods and allow but do not require the pods to schedule onto nodes with matching taints. Taints and tolerations work together to ensure pods are not scheduled onto inappropriate nodes. When one or more taints are applied to a node, it indicates that the node should not accept any pods that do not tolerate the taints. 
 ## Container scanning
 Embedding foreign code or services into your service can expose your product to attacks of great impact such as injection of malicious code. This is one reason code review and automated security testing are mandatory on most security standards. The product owner is responsible for the published product on all aspects, including third-party libraries. PCI requires automated application vulnerability security assessment tools or methods like image scanning solutions and static code analysis.

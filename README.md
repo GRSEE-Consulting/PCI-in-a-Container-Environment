@@ -12,3 +12,5 @@ PCI requirements and guidelines generally focus on legacy infrastructure. Contai
 - Implement Strong Access Control Measures
 - Regularly Monitor and Test Network
 - Maintain an Information Security Policy
+## Key Discussion Topics
+##### Container Segmentation

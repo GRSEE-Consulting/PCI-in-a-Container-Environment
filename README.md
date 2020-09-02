@@ -6,9 +6,9 @@ Setting up PCI within a container environment presents unique challenges. The fo
 ## Fundamental Differences
 PCI requirements and guidelines generally focus on legacy infrastructure. Container services do not have specific guidelines that dictate how to build a PCI compliant application within a container environment. These environments have characteristics not found in standard infrastructure, such as dynamic expansion and shrinking, sharing a hosting environment, temporary storage, and short uptime.
 ###### The infrastructure requirements for compliance include but are not limited to:
-    Build and Maintain a Secure Network
-    Protect Card Holder Data
-    Maintain a Vulnerability Management Program
-    Implement Strong Access Control Measures
-    Regularly Monitor and Test Network
-    Maintain an Information Security Policy
+-Build and Maintain a Secure Network
+-Protect Card Holder Data
+-Maintain a Vulnerability Management Program
+-Implement Strong Access Control Measures
+-Regularly Monitor and Test Network
+-Maintain an Information Security Policy
